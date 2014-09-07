@@ -1,14 +1,16 @@
 package nmishewa.geekycamp.dictionary;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
 	public static File file = new File(
-			"C:\\Users\\N\\workspace\\Dictionary\\src\\nmishewa\\geekycamp\\dictionary\\bg_win1251.txt");
+			"C:\\Users\\N\\Desktop\\New folder\\Dictionary\\src\\nmishewa\\geekycamp\\dictionary\\bg_win1251.txt");
 	public static int value = 1;
 	private static Scanner input;
 	public static Scanner in = new Scanner(System.in);
@@ -17,10 +19,10 @@ public class Main {
 	public static void main(String[] args) throws FileNotFoundException {
 		readFile();
 		System.out.println("Enter number of function wanted" + "\n1 to add"
-				+ "\n 2 for searching by prefix" + "\n for deleting");
+				+ "\n2 for searching by prefix" + "\n3 for deleting");
 		int choice = in.nextInt();
 		if (choice == 1) {
-			System.out.println("enter words seprated by comma");
+			System.out.println("enter wordS seprated by comma");
 			String wd = in.next();
 			add(wd);
 		}
@@ -30,7 +32,7 @@ public class Main {
 			prefixSearch(wd);
 		}
 		if (choice == 3) {
-			System.out.println("ENTER word to delete");
+			System.out.println("ENTER wordS to delete seprated by comma");
 			String wd = in.next();
 			remove(wd);
 		}
@@ -76,37 +78,46 @@ public class Main {
 			if (!map.containsKey(line[j])) {
 				map.put(line[j], value);
 				value++;
-				done = true;
+
+				try {
+					FileWriter fw = new FileWriter(file.getAbsoluteFile());
+					BufferedWriter bw = new BufferedWriter(fw);
+					bw.write(map.toString());
+					bw.close();
+					done = true;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			} else {
 				continue;
 			}
 		}
 
 		if (done == true) {
-			System.out.println("Succes");
+			System.out.println("Success");
 		}
 
 	}
 
 	public static void remove(String wd) {
-		System.out.println("Enter words you want to remove");
 		boolean done = false;
-
 		String word = wd.toLowerCase();
 		String[] line = word.split("[,\\s]+");
 		for (int j = 0; j < line.length; j++) {
-			if (map.containsKey(line[j])) {
-				map.remove(line[j], map.get(line[j]));
-				value--;
-				done = true;
-			} else {
-				continue;
-			}
+			map.remove(line[j]);
 		}
-
+		try {
+			FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(map.toString());
+			bw.close();
+			done = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		if (done == true) {
-			System.out.println("Succes");
+			System.out.println("Success");
 		}
-
 	}
+
 }
