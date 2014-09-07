@@ -6,7 +6,7 @@ public static void main(String[] args) {
 	public static void looping(int[][]anArray,int K){
 		for(int i=0; i<anArray.length; i++){ 
 	        for(int j=0; j<anArray[i].length; i++){
-	            if(anArray[i][j] == Ê){
+	            if(anArray[i][j] == K){
 	            	
 	            }
 	            else{
