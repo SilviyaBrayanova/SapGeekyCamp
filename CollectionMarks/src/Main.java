@@ -3,10 +3,9 @@ import java.util.Collections;
 import java.util.List;
 
 /*Homework Collection of postalMarks
- * Има още много функции, които може да се добавят като да променят директно
- * обекта,но реално може просто да изтрие марката и да я направи наново
- * -Н.Мишева 
- * */
+Notice* PostMarks, Anniversary, Series does not have names so they will
+return as hashcodes.
+ */
 public class Main {
 	public static ArrayList<Anniversary> AnnList = new ArrayList<Anniversary>();
 	public static ArrayList<Series> SeriesL = new ArrayList<Series>();
@@ -32,32 +31,29 @@ public class Main {
 		all.add(b);
 		all.add(a);
 		Anniversary editionA = new Anniversary((ArrayList<PostMark>) first);
-		Series editionB = new Series(second);
+		Series editionB = new Series((ArrayList<PostMark>)second);
 		/* How things look before using any functions */
 		AnnList.add(editionA);
 		SeriesL.add(editionB);
-		System.out.println(editionA.toString());
-		System.out.println(editionB.toString());
-		System.out.println(AnnList.toString());
-		System.out.println(SeriesL.toString());
-
+	
 		/* After using functions */
 		AddPostMarkBySeries(true, false, 1978, "Russia", editionB);
-		System.out.println(editionB.getList().toString());
+		System.out.println("List of post marks is: "+editionB.getList().toString());
 		AddPostMarkByAnn(true, false, 1997, "USA", editionA);
-		System.out.println(editionA.getList().toString());
+		System.out.println("List of post marks is: "+editionA.getList().toString());
 		sortByYear();
 		sortByCountry();
 		removeMarkByAnn(editionA, i);
-		System.out.println(editionA.getList().toString());
-		removeMarkBySerie(editionB, j);
-		System.out.println(editionB.getList().toString());
+		System.out.println("List of post marks in Anniversary pack is: "+first.toString());
+		removeMarkBySerie(editionB, b);
+		System.out.println("List of post in Series pack marks is: "+second.toString());
 		AddNewAnniversary(da, za, ra, ga);
-		System.out.println(AnnList.toString());
+		System.out.println("List of Anniversary packs is: "+AnnList.toString());
 		AddNewSeries(da, za, ra, ga);
-		System.out.println(SeriesL.toString());
+		System.out.println("List of Series pack is: "+SeriesL.toString());
 		removeFromAll(a);
-		System.out.println(all.toString());
+		System.out.println("List of all post marks is: "+all.toString());
+		
 	}
 
 	/*
@@ -150,9 +146,9 @@ public class Main {
 	public static void removeMarkByAnn(Anniversary AnnName, PostMark postMark) {
 		for (int i = 0; i < AnnList.size(); i++) {
 			if (AnnName.equals(AnnList.get(i))) {
-				for (int j = 0; j < AnnList.get(i).getList().size(); i++) {
-					if (postMark.equals(AnnList.get(i).getList().get(j))) {
-						AnnList.get(i).getList().remove(postMark);
+				for (int j = 0; j < AnnName.getList().size(); j++) {
+					if (postMark.equals(AnnName.getList().get(j))) {
+						AnnName.getList().remove(postMark);
 					}
 				}
 			}
@@ -166,9 +162,9 @@ public class Main {
 	public static void removeMarkBySerie(Series SerieName, PostMark postMark) {
 		for (int i = 0; i < SeriesL.size(); i++) {
 			if (SerieName.equals(SeriesL.get(i))) {
-				for (int j = 0; j < SeriesL.get(i).getList().size(); i++) {
-					if (postMark.equals(SeriesL.get(i).getList().get(j))) {
-						SeriesL.get(i).getList().remove(postMark);
+				for (int j = 0; j < SerieName.getList().size(); j++) {
+					if (postMark.equals(SerieName.getList().get(j))) {
+						SerieName.getList().remove(postMark);
 
 					}
 				}
