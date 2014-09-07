@@ -48,8 +48,11 @@ public class Main {
 		while (input.hasNext()) {
 			String word = input.next().toLowerCase();
 			String[] line = word.split("[,\\s]+");
+			// puts words in the array
 			for (int j = 0; j < line.length; j++) {
+				//iterrate troght the array of new words
 				map.put(line[j], value);
+				// put every word in it the map
 				value++;
 				done = true;
 			}
@@ -62,9 +65,13 @@ public class Main {
 	public static void prefixSearch(String wd) {
 		System.out.println("Enter prefix");
 		String prefix = wd.toLowerCase();
+		/*O(N)*/
 		for (Map.Entry<String, Integer> key : map.entrySet()) {
+			//iterrate trough the map enterySet
 			if (key.getKey().startsWith(prefix)) {
+				// see if the current key starts with current prefix
 				System.out.println(key.getKey());
+				
 			}
 		}
 
@@ -74,11 +81,15 @@ public class Main {
 		boolean done = false;
 		String word = wd.toLowerCase();
 		String[] line = word.split("[,\\s]+");
+		/*linear O(N)*/
 		for (int j = 0; j < line.length; j++) {
+			//iterrate trough the array with words
 			if (!map.containsKey(line[j])) {
+				//check if there isn't already such word
 				map.put(line[j], value);
+				// add it to the map if not exisitng				
 				value++;
-
+				//Writing it in the file by FileWriter and BufferedWriter
 				try {
 					FileWriter fw = new FileWriter(file.getAbsoluteFile());
 					BufferedWriter bw = new BufferedWriter(fw);
@@ -88,7 +99,7 @@ public class Main {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			} else {
+			} else {// if the word exist skip it
 				continue;
 			}
 		}
@@ -103,9 +114,13 @@ public class Main {
 		boolean done = false;
 		String word = wd.toLowerCase();
 		String[] line = word.split("[,\\s]+");
+		/*Linear O(N)*/
 		for (int j = 0; j < line.length; j++) {
+			// iterrate trough the array 
 			map.remove(line[j]);
+			//remove every word[i] from the map
 		}
+		// write it in the file
 		try {
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
