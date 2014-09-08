@@ -9,6 +9,7 @@ public class FileOps {
 	public static File[] listOfFiles = folder.listFiles();
 
 	public static void main(String[] argv) throws IOException {
+		toUpperCase();
 
 	}
 
