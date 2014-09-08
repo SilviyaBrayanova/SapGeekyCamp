@@ -3,10 +3,10 @@ package renaming;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import org.apache.commons.io.FilenameUtils;
 
 public class FileOps {
@@ -24,11 +24,14 @@ public class FileOps {
 			if (listOfFiles[i].isFile()) {
 				String newname = mixCase(listOfFiles[i].getName());
 				File renamedFile = new File(folder, newname);
+
 				if (listOfFiles[i].renameTo(renamedFile)) {
 					String extension = FilenameUtils
 							.getExtension(listOfFiles[i].getName());
-					if (extension.equals("txt") || extension.equals("log")) {
-						rewrite(renamedFile);
+					if (extension.equals("txt") || extension.equals("pdf")
+							|| extension.equals("tXt")
+							|| extension.equals("TxT")) {
+						rewrite(renamedFile.getAbsoluteFile());
 
 						System.out.println("Done");
 					}
@@ -71,11 +74,16 @@ public class FileOps {
 				String line = mixCase(inFile.readLine());
 				outw.write(line);
 			}
-			outw.close();
-			inFile.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if (inFile != null)
+				inFile.close();
+
+			if (reader != null)
+				reader.close();
 		}
+
 	}
 }
